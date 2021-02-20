@@ -1,0 +1,13 @@
+.*
+**/.**
+!config/*
+config/.emacs.d/**
+!config/.emacs.d/my**
+!.gitignore
+**/.*~
+**~
+**.pdf
+**/\#*
+**#
+**/.\#
+**.gz
