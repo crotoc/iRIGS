@@ -74,7 +74,7 @@ option_list <- list(
                 type="character",
                 help="Generic evidence file; NULL to use no generic evi. Columns names must contain less/greater [default: %default]"),
     make_option(c("--quick_mode"), action="store",
-                default="rf",
+                default="NULL",
                 type="character",
                 help=" networkonly, generic [default: %default]"),
     make_option(c("--fillNA"), action="store",
@@ -179,7 +179,7 @@ parameter_file <- paste(format(Sys.time(), "%Y%m%d-%H%M-"),stri_rand_strings(1,5
 
 if(!dir.exists(opt$res_path)) dir.create(opt$res_path,showWarnings=T,recursive=T)
 
-if(opt$quick_mode=="networkonly"){
+if(opt$quick_mode=="networoknly"){
     opt$generic_evi_path="NULL"
     opt$generic_evi_file="NULL"
     opt$extra_evi_path="NULL"
@@ -244,8 +244,6 @@ if(opt$quick_mode=="networkonly"){
     opt$extra_evi_file="NULL"
     opt$generic_evi_file="/scratch/cgg/chenr6/Database/Extra_evidence/rui_generic/generic.evi"
     opt$generic_evi_path="NULL"
-}else{
-    stop("--quick_mode value is wrong")
 }
 
 
@@ -284,19 +282,19 @@ opt$nodes <- colnames(pro_p)
 ####################################################################
 #######		For debug each fucntion
 #####################################################################
-##  source("~/Rscripts/mypkg/Gibbs_0.0.0.9004/Gibbs/R/extract_candidates.R")
+## source("~/Rscripts/mypkg/iRIGS/R/extract_candidates.R")
 
-## source("~/Rscripts/mypkg/Gibbs_0.0.0.9004/Gibbs/R/evi_direction.R")
-## source("~/Rscripts/mypkg/Gibbs_0.0.0.9004/Gibbs/R/generic_evi.R")
-## source("~/Rscripts/mypkg/Gibbs_0.0.0.9004/Gibbs/R/extra_evi.R")
-## source("~/Rscripts/mypkg/Gibbs_0.0.0.9004/Gibbs/R/mahalanobis_transformation.R")
+## source("~/Rscripts/mypkg/iRIGS/R/evi_direction.R")
+## source("~/Rscripts/mypkg/iRIGS/R/generic_evi.R")
+## source("~/Rscripts/mypkg/iRIGS/R/extra_evi.R")
+## source("~/Rscripts/mypkg/iRIGS/R/mahalanobis_transformation.R")
 
 
-## source("~/Rscripts/mypkg/Gibbs_0.0.0.9004/Gibbs/R/post_burnin.R")
-## source("~/Rscripts/mypkg/Gibbs_0.0.0.9004/Gibbs/R/sampling.R")
-## source("~/Rscripts/mypkg/Gibbs_0.0.0.9004/Gibbs/R/predict_gene.R")
+## source("~/Rscripts/mypkg/iRIGS/R/post_burnin.R")
+## source("~/Rscripts/mypkg/iRIGS/R/sampling.R")
+## source("~/Rscripts/mypkg/iRIGS/R/predict_gene.R")
 
-## source("~/Rscripts/mypkg/Gibbs_0.0.0.9004/Gibbs/R/joint_dis.R")
+## source("~/Rscripts/mypkg/iRIGS/R/joint_dis.R")
 
 ####################################################################
 #######		Extract genes from SNP region using Quan
@@ -340,7 +338,7 @@ opt$training_gene<-post_burnin(opt,evi_mode="generic",with_region = FALSE,run_mo
 #######		Save RData
 #####################################################################
 cat("save training...\n")
-save.image(file=paste(opt$res_path,"/",opt$res_prefix,"_gibbs_sampling_",opt$network,"_rp_",opt$res_prob,"_posterior_probability.training.RData",sep=""))
+save.image(file=paste(opt$res_path,"/",opt$res_prefix,"_gibbs_sampling_","rp_",opt$res_prob,"_posterior_probability.training.RData",sep=""))
 
 
 ####################################################################
@@ -383,7 +381,7 @@ if(opt$evaluate_region){
 
 opt$joi_dis <- joint_dis(opt)
 
-save(opt,file=paste(opt$res_path,"/",opt$res_prefix,"_gibbs_sampling_",opt$network,"_rp_",opt$res_prob,"_posterior_probability.RData",sep=""))
+save(opt,file=paste(opt$res_path,"/",opt$res_prefix,"_gibbs_sampling_","rp_",opt$res_prob,"_posterior_probability.RData",sep=""))
 
 out.train <- NULL
 out.train$pp <- opt$training_gene$count[,c("official_name","p","SNP","region_p"),]
@@ -395,10 +393,10 @@ out.train$pp[,chr:=gsub("chr","",chr)]
 out.train$pp <- out.train$pp[order(SNP,-p),]
 out.train$chosen <- opt$training_gene$chosen
 
-res.freq.file<-paste(opt$res_path,"/",opt$res_prefix,"_gibbs_sampling_",opt$network,"_rp_",opt$res_prob,"_posterior_probability_training",sep="")
+res.freq.file<-paste(opt$res_path,"/",opt$res_prefix,"_gibbs_sampling_","rp_",opt$res_prob,"_posterior_probability_training",sep="")
 write.table(out.train$pp,res.freq.file,quote=F,row.names=F,sep="\t")
 
-res.chosen.file<-paste(opt$res_path,"/",opt$res_prefix,"_gibbs_sampling_",opt$network,"_rp_",opt$res_prob,"_predicted_genes_each_round_training",sep="")
+res.chosen.file<-paste(opt$res_path,"/",opt$res_prefix,"_gibbs_sampling_","rp_",opt$res_prob,"_predicted_genes_each_round_training",sep="")
 write.table(out.train$chosen,res.chosen.file,quote=F,row.names=F,sep="\t")
 
 
@@ -414,10 +412,10 @@ out$chosen <- opt$pg$chosen
 
 
 
-res.freq.file<-paste(opt$res_path,"/",opt$res_prefix,"_gibbs_sampling_",opt$network,"_rp_",opt$res_prob,"_posterior_probability",sep="")
+res.freq.file<-paste(opt$res_path,"/",opt$res_prefix,"_gibbs_sampling_","rp_",opt$res_prob,"_posterior_probability",sep="")
 write.table(out$pp,res.freq.file,quote=F,row.names=F,sep="\t")
 
-res.chosen.file<-paste(opt$res_path,"/",opt$res_prefix,"_gibbs_sampling_",opt$network,"_rp_",opt$res_prob,"_predicted_genes_each_round",sep="")
+res.chosen.file<-paste(opt$res_path,"/",opt$res_prefix,"_gibbs_sampling_","rp_",opt$res_prob,"_predicted_genes_each_round",sep="")
 write.table(out$chosen,res.chosen.file,quote=F,row.names=F,sep="\t")
 
 end.time <- Sys.time()
