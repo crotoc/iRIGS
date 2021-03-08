@@ -3,7 +3,7 @@
 #' @param opt A list of parameters in Gibbs script
 #' @return A data.table of coocurrence frequence
 #' 
-#' @import data.table
+#' @import data.table reshape2
 #' @export
 #' @examples
 #' 

@@ -7,7 +7,7 @@
 #' count  A data.table including all posterior probability and region risk p.
 #' chosen A data.table ncluding the genes chosen in each round.
 #' region_risk A data.table including the TRUE/FALSE in each round.
-#' @import data.table
+#' @import data.table doParallel foreach
 #' @export
 #' @examples
 #' burnin <- sampling(opt,mode="burnin",with_region=FALSE)

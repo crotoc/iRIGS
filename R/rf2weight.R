@@ -8,6 +8,8 @@
 #' @return Characters of a single gene 
 #' @import
 #' e1071
+#' data.table
+#' RLT
 #' @export
 #' @examples
 #' predict_gene(pickup,region_chosen,remaining,opt,count))

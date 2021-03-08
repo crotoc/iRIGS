@@ -7,7 +7,7 @@
 #' count  A data.table including all posterior probability and region risk p.
 #' chosen A data.table ncluding the genes chosen in each round.
 #' region_risk A data.table including the TRUE/FALSE in each round.
-#' @import data.table
+#' @import data.table doParallel foreach
 #' @export
 #' @examples
 #' burnin <- sampling(opt,mode="burnin",with_region=FALSE)
@@ -90,7 +90,7 @@ sampling_burnin_circle <- function(param,opt){
         if(circle == 1){cat("\nBegin to predicting genes...\n")}
 
         ## Predict genes
-        remaining<-foreach(pickup=1:length(opt$region),.combine=c) %dopar% Gibbs::predict_gene(pickup,param$region_chosen,param$remaining,opt,circle)
+        remaining<-foreach(pickup=1:length(opt$region),.combine=c) %dopar% predict_gene(pickup,param$region_chosen,param$remaining,opt,circle)
         
         param$count <- count_processing(param$count,remaining,opt)
 

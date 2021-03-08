@@ -7,7 +7,7 @@
 #' opt A list of parameter in Gibbs
 #' @return Characters of a single gene 
 #' @import
-#' e1071
+#' data.table
 #' @export
 #' @examples
 #' predict_gene(pickup,region_chosen,remaining,opt,circle,count)

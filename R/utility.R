@@ -12,6 +12,12 @@
 #'
 #' @import
 #' data.table
+#' pacman
+#' optparse
+#' magrittr
+#' stringi
+#' devtools
+#' roxygen2
 #'
 #' @export
 #'

@@ -7,6 +7,7 @@
 #' opt A list of parameter in Gibbs
 #' @return Characters of a single gene 
 #' @import
+#' data.table
 #' e1071
 #' @export
 #' @examples

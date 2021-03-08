@@ -6,7 +6,8 @@
 #' remaining A vector of genes. The candidates gene from last iteration.
 #' opt
 #' @return Logical. TRUE when the region is chosen.
-#'
+#' @import
+#' data.table
 #' @export
 #' @examples
 #'  region_chosen<-unlist(foreach(pickup=1:length(opt$region)) %dopar% region_chosen_update(pickup,region_chosen,remaining,opt))
