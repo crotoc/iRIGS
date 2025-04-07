@@ -25,7 +25,7 @@ extract_candidates<-function(opt){
     }
     
     if(substr(gwas$chr[1],1,3)!="chr"){
-        gwas$chr<-paste("chr",gwas$chr,sep="")
+        gwas[,chr:=paste("chr",gwas$chr,sep="")]
     }
     
     gwas[,gwas_start:=ifelse((pos_hg19-ws)>0,pos_hg19-ws,0)]

@@ -4,7 +4,7 @@ suppressMessages(require(optparse))
 
 option_list <- list(
     make_option(c("--cand_loci"), action="store",
-                default="/scratch/cgg/chenr6/subGWAS/svm_test/gwas_file/scz.108.fmt",
+                default="/nobackup/cgg/chenr6/subGWAS/svm_test/gwas_file/scz.108.fmt",
                 type="character",
                 help="SNP files [default: %default]"),
     make_option(c("--cand_gene"), action="store",
@@ -12,7 +12,7 @@ option_list <- list(
                 type="character",
                 help="candidate gene in each loci region [default: %default]"),
     make_option(c("--gene_symbol"), action="store",
-                default="/scratch/cgg/chenr6/Database/Gibbs_data_from_quan/newcopy/53934_transcribed_genes_GencodeV12_with_official_symbol",
+                default="/nobackup/cgg/chenr6/Database/Gibbs_data_from_quan/newcopy/53934_transcribed_genes_GencodeV12_with_official_symbol",
                 type="character",
                 help="Gene symbols file used for extract genes in each loci region [default: %default]"),
     make_option(c("--network"), action="store",
@@ -161,10 +161,19 @@ option_list <- list(
     make_option(c("--configfile"), action="store",
                 default="1",
                 type="character",
+                help=" [default: %default]"),
+    make_option(c("--test"), action="store",
+                default=FALSE,
+                type="logical",
                 help=" [default: %default]")
 )
 
 opt <- parse_args(OptionParser(option_list=option_list))
+
+if(opt$test){
+    save.image(file="1.rda")
+    stop("debug")
+}
 
 suppressMessages(require(magrittr))
 suppressMessages(require(data.table))
@@ -187,9 +196,10 @@ if(opt$quick_mode=="networoknly"){
     opt$method <- "NULL"
 }else if(opt$quick_mode=="generic"){
     opt$generic_evi_prefix="^generic"
-    opt$generic_evi_file="/scratch/cgg/chenr6/Database/Extra_evidence/rui_generic/generic.evi.fmt"
+    opt$generic_evi_file="/nobackup/cgg/chenr6/Database/Extra_evidence/rui_generic/generic.evi.fmt"
     opt$extra_evi_path="NULL"
-    opt$extra_evi_file="/scratch/cgg/chenr6/Database/Extra_evidence/rui_extra/extra_generic.evi.fmt"
+    opt$extra_evi_file="/nobackup/cgg/chenr6/Database/Extra_evidence/rui_extra/extra_generic.evi.fmt"
+    opt$network="/nobackup/cgg/chenr6/Database/Gibbs_data_from_quan/go_propogation_probality_rp_0.3.RData"
     opt$method <- "NULL"
 }else if(opt$quick_mode=="genericfs0"){
     opt$generic_evi_prefix="^generic"
@@ -199,8 +209,8 @@ if(opt$quick_mode=="networoknly"){
     opt$method <- "NULL"
 }else if(opt$quick_mode=="all"){
     opt$generic_evi_prefix="^generic"
-    opt$generic_evi_file="/scratch/cgg/chenr6/Database/Extra_evidence/rui_generic/generic.evi"
-    opt$extra_evi_path="/scratch/cgg/chenr6/Database/Extra_evidence/rui_extra/"
+    opt$generic_evi_file="/nobackup/cgg/chenr6/Database/Extra_evidence/rui_generic/generic.evi.fmt"
+    opt$extra_evi_path="/nobackup/cgg/chenr6/Database/Extra_evidence/rui_extra/"
     opt$extra_evi_file="NULL"
 }else if(opt$quick_mode=="rf"){
     opt$method <- "rf"
