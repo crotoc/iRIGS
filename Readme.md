@@ -36,7 +36,7 @@ All the files used in our study can be downloaded here:
 
 ## network only mode 
 	
-	Gibbs --cand_loci scz.145.sub.1e-6.5e5.bed.fmt \
+	iRIGS --cand_loci scz.145.sub.1e-6.5e5.bed.fmt \
 		  --network go_propogation_probality_rp_0.3.RData \
 		  --gene_symbol 53934_transcribed_genes_GencodeV12_with_official_symbol \
 		  --threads 20 \
@@ -53,7 +53,7 @@ All the files used in our study can be downloaded here:
 
 ## feature integrating mode
 
-	Gibbs --cand_loci scz.145.sub.1e-6.5e5.bed.fmt \
+	iRIGS --cand_loci scz.145.sub.1e-6.5e5.bed.fmt \
 		  --network go_propogation_probality_rp_0.3.RData \
 		  --gene_symbol 53934_transcribed_genes_GencodeV12_with_official_symbol \
 	      --generic_evi_file generic.evi \
